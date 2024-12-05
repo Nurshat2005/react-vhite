@@ -4,7 +4,7 @@ import axios from "axios";
 
 const ProductCard = () => {
   const { product, setProduct } = useContext(ProductContext);
-  let token=product.map((el)=>el._id)
+  let token = product.map((el) => el._id);
   async function GetPro() {
     let res = await axios.get(
       `https://api.elchocrud.pro/api/v1/76c97cef157f36b19c870f5b394a5dcc/vite`
@@ -20,8 +20,9 @@ const ProductCard = () => {
   }
   async function PatchProduct() {
     let res = await axios.patch(
-      `https://api.elchocrud.pro/api/v1/76c97cef157f36b19c870f5b394a5dcc/vite/${token}`,{
-        name:"asylbek"
+      `https://api.elchocrud.pro/api/v1/76c97cef157f36b19c870f5b394a5dcc/vite/${token[0]}`,
+      {
+        name: "mchs",
       }
     );
     let { data } = res;
@@ -34,7 +35,7 @@ const ProductCard = () => {
   return (
     <>
       {product.map((el) => (
-        <div className="card" >
+        <div className="card">
           <h1 onClick={() => DeletPro()} className="x">
             X
           </h1>
@@ -42,9 +43,7 @@ const ProductCard = () => {
           <img width={300} src={el.url} alt="img" />
           <h1>{el.name}</h1>
           <h2>{el.price}$</h2>
-          <button
-          onClick={()=>PatchProduct()}
-          >Upload</button>
+          <button onClick={() => PatchProduct()}>Upload</button>
         </div>
       ))}
     </>
